@@ -10,8 +10,10 @@ import com.book.demo.entity.Book;
 import com.book.demo.repository.BookRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping(value="/books")
 public class BookController {
@@ -28,11 +31,15 @@ public class BookController {
     private BookRepository bookRepository;
 
     @PostMapping
-    public String saveBook(@RequestBody Book book) {
-        bookRepository.save(book);
-        return "success";
-        
+  public ResponseEntity<Book> createBook(@RequestBody Book book) {
+    try {
+        Book _book = bookRepository
+          .save(book);
+      return new ResponseEntity<>(_book, HttpStatus.CREATED);
+    } catch (Exception e) {
+      return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+}
     @GetMapping
     public List<Book> findAlBook() {
         return bookRepository.findAll();
