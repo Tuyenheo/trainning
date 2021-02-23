@@ -24,11 +24,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-@RestController
+@RestController  
 @RequestMapping(value="/books")
 public class BookController {
     @Autowired
-    private BookRepository bookRepository;
+    private BookRepository bookRepository; 
 
     @PostMapping
   public ResponseEntity<Book> createBook(@RequestBody Book book) {
