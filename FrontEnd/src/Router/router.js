@@ -6,17 +6,17 @@ const routes = [
     {
         path: '/',
         exact: true,
-        component: Home
+        main: () => <Home />
     },
     {
-        path: '/newbook',
+        path: '/add',
         exact: false,
-        component: NewBook
+        main: ({history}) => <NewBook history={history}/>
     },
     {
-        path: '/books/id',
+        path: '/books/:id_book',
         exact: false,
-        component: NewBook,
+        main: ({match, history}) => <NewBook match={match} history={history}/>
         
     }
 ];

@@ -11,7 +11,7 @@ import { createBrowserHistory } from "history";
 const history = createBrowserHistory();
 class App extends Component {
   
-  showRouter = (route) => {
+  showRouter = (routes) => {
     var result = null;
     if(routes.length > 0) {
       result = routes.map((route,index) => {
@@ -20,9 +20,7 @@ class App extends Component {
             key = {index}
             path = {route.path}
             exact = {route.exact}
-            component = {route.component}
-            history = {history}
-            // match = {match}
+            component = {route.main}
           ></Route>
         );
       })

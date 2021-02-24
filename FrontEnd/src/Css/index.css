@@ -79,13 +79,19 @@ header .container {
 }
 .centered {
   text-align: center;
-  font-size: 0;
 }
 .centered .card-body {
   float: none;
   display: inline-block;
   text-align: left;
 } 
+.error {
+  color: red;
+}
+.form-group label {
+  text-align: left;
+  display: block;
+}
 main {
   margin: 4em 0;
 }

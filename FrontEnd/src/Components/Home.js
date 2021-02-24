@@ -4,6 +4,7 @@ import DataBook from './DataBook';
 import ReactPaginate from 'react-paginate';
 import callApi from '../Api/ApiCall';
 import { Link } from 'react-router-dom';
+import Search from './Search';
 
 class Home extends Component {
 
@@ -11,16 +12,17 @@ class Home extends Component {
     super(props);
     this.state={
       books: [],
+      isSearch: false,
+      itemsSearch: [],
+      valueSearch: '',
       offset: 0,
       perPage: 5,
       currentPage: 0
     };
-    this.handlePageClick = this
-            .handlePageClick
-            .bind(this);
+    this.handlePageClick = this.handlePageClick.bind(this);
     }
 
-
+    // ham delete book
     DeleteBook = (id) => {
       let books = this.state.books;
       callApi('books/'+ id,'DELETE',null).then(res =>{
@@ -80,11 +82,13 @@ componentDidMount() {
 }
 
 
+
   render() {
+    console.log(this.props.renderItem);
     return (
       <div className="Home">    
           
-          <DataBook TableDataBook =  {this.state.postData}/>
+          <DataBook TableDataBook =  {this.state.postData} renderItem = {this.props.renderItem}  />
           <ReactPaginate
                 previousLabel={"<"}
                 nextLabel={">"}
