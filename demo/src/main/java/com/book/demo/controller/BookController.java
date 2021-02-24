@@ -46,7 +46,7 @@ public class BookController {
     }
 
     @GetMapping("/{id_book}")
-    public ResponseEntity<Book> findUserById(@PathVariable(value = "id") Integer id_book) {
+    public ResponseEntity<Book> findUserById(@PathVariable(value = "id_book") Integer id_book) {
         Optional<Book> book = bookRepository.findById(id_book);
     
         if(book.isPresent()) {
@@ -57,7 +57,7 @@ public class BookController {
     }
 
     @PutMapping("/{id_book}")
-    public ResponseEntity<Book> update(@PathVariable(value = "id") Integer id_book,
+    public ResponseEntity<Book> update(@PathVariable(value = "id_book") Integer id_book,
         @Validated @RequestBody Book BookDetails) throws ResourceNotFoundException {
             Book book = bookRepository.findById(id_book)
         .orElseThrow(() -> new ResourceNotFoundException("Book not found for this id :: " + id_book));
